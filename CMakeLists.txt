@@ -30,10 +30,19 @@ endif(WIN32)
 add_executable(geom-modeling-test ${SRC_LIST_C})
 
 # Specify the project link library gtest and gtest_main
+if(WIN32)
 target_link_libraries(geom-modeling-test
                       gtest
                       gtest_main
 )
+elseif(UNIX)
+target_link_libraries(geom-modeling-test
+                      libgtest
+                      libgtest_main
+)
+elseif(APPLE)
+#
+endif(WIN32)
 
 if (CMAKE_VERSION VERSION_GREATER 3.12)
   set_property(TARGET geom-modeling-test PROPERTY CXX_STANDARD 20)
